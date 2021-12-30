@@ -15,10 +15,10 @@
 ### Front-End
 
 **Update File List**
-
-- *App.js*
-- *App.css*
-- *Contents.js*
+- *src(folder)*
+  - *App.js*
+  - *App.css*
+  - *Contents.js*
 
 
 
@@ -30,15 +30,15 @@
 <div className="App">
       <h1>Guest Book</h1>
       <div className="form-wrapper">
-        <input className="name" type='text' placeholder="이름" onChange={getValue} name = 'name'/>
-        <textarea className="content" placeholder="방명록 내용 입력" onChange={getValue} name = 'content'></textarea>
+        <input className="name" type='text' value={Content.name} placeholder="이름" onChange={getValue} name = 'name'/>
+        <textarea className="content" value={Content.content} placeholder="방명록 내용 입력" onChange={getValue} name = 'content'></textarea>
       </div>
       <button className="submit-button" onClick={handleClick}>글쓰기</button>
       
       {viewContent.map(e =>{
         return <Item Name = {e.name} Date = {e.date} Contents={e.content} />
       })}
- </div>
+</div>
 ```
 
 **Item Component**
@@ -49,9 +49,6 @@ class Item extends React.Component {
         Name: "홍길동",
         Date: "21-12-25",
         Contents: "내용없음",
-    }
-    state = {
-        date: new Date()
     }
     render(){ 
         return (

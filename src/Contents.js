@@ -7,11 +7,6 @@ class Item extends React.Component {
         Date: "21-12-25",
         Contents: "내용없음",
     }
-
-    state = {
-        date: new Date()
-    }
-
     render(){ 
         return (
             <div className="Item">

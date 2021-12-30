@@ -43,10 +43,11 @@ function App() {
   };
 
   const eraseInput = e => {
-    let name_input = document.getElementsByClassName('name');
-    name_input.value = '';
-    let content_input = document.getElementsByClassName('text-area');
-    content_input.value = '';
+    setContent({
+      name: '', 
+      date: '', 
+      content: '',
+    })
   }
 
   const getGuestInfoList = async() => {
@@ -59,25 +60,8 @@ function App() {
     });
 
     const data = response.data;
-    {data.map(d => {
-      // create previous Contents
-      console.log(d);
-
-      let name = d.name;
-      let date = d.date;
-      let content = d.content;
-      
-
-      setContent({
-        content: content,
-        date: date,
-        name: name,
-      });
-      
-      console.log(Content);
-      //  concat Content 
-      setViewContent(viewContent.concat({...Content}));
-    })};
+    console.log(data);
+    setViewContent(data);
   }
 
   // main handler function
@@ -94,7 +78,6 @@ function App() {
         ...Content,
       date: todayTimeFormal()
     });
-    getGuestInfoList();
     fetchGuest();
     eraseInput();
     setViewContent(viewContent.concat({...Content}));
@@ -106,12 +89,13 @@ function App() {
     getGuestInfoList();
   }
 
+
   return (
     <div className="App">
       <h1>Guest Book</h1>
       <div className="form-wrapper">
-        <input className="name" type='text' placeholder="이름" onChange={getValue} name = 'name'/>
-        <textarea className="content" placeholder="방명록 내용 입력" onChange={getValue} name = 'content'></textarea>
+        <input className="name" type='text' value={Content.name} placeholder="이름" onChange={getValue} name = 'name'/>
+        <textarea className="content" value={Content.content} placeholder="방명록 내용 입력" onChange={getValue} name = 'content'></textarea>
       </div>
       <button className="submit-button" onClick={handleClick}>글쓰기</button>
       
